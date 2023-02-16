@@ -253,7 +253,7 @@ To link this version, run:
 Linking /usr/local/Cellar/python@3.11/3.11.2... 21 symlinks created.
 ```
 
-![Proof here](/assets/AWS%20CLI%20Install%20and%20verify.png)
+![Proof here](assets/AWS-CLI-Install-and-verify.png)
 
 ## HOMEWORK CHALLENGES
 
