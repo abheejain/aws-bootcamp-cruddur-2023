@@ -12,7 +12,7 @@ AWS CLI is most ofter and widely used for working with AWS commands using a comm
 
 ### AWS CLI- Install
 
-Ref link: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+Ref link: https://formulae.brew.sh/formula/awscli
 
 Using `Brew` to install
 
@@ -255,6 +255,10 @@ Linking /usr/local/Cellar/python@3.11/3.11.2... 21 symlinks created.
 
 ![Proof here](assets/AWS-CLI-Install-and-verify.png)
 
+<hr>
 ## HOMEWORK CHALLENGES
 
+<hr>
 ## ADDITIONAL HOMEWORK CHALLENGES
+
+<hr>
