@@ -8,252 +8,144 @@ Getting all the information and th base to be crated from the reference videos f
 
 ## The Homework Tasks for Week0
 
+### Recreate Conceptual Diagram in Lucid Charts or on a Napkin
+<Image coming sooon>
+
+### Recreate Logical Architectual Diagram in Lucid Charts
+<Image coming sooon>
+
+
 AWS CLI is most ofter and widely used for working with AWS commands using a command prompt. We will start with installing the AWS CLI
 
 ### AWS CLI- Install
 
-Ref link: https://formulae.brew.sh/formula/awscli
+- We are going to install the AWS CLI when our Gitpod enviroment lanuches.
+- We are are going to set AWS CLI to use partial autoprompt mode to make it easier to debug CLI commands.
+- The bash commands we are using are the same as the [AWS CLI Install Instructions]https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
-Using `Brew` to install
 
-Command
+Update our `.gitpod.yml` to include the following task.
 
-```
-brew install awscli
-```
-
-Output
-
-```
-❯ which aws
-aws not found
-❯ brew install awscli
-Running `brew update --auto-update`...
-==> Downloading https://formulae.brew.sh/api/formula.json
-######################################################################## 100.0%
-==> Downloading https://formulae.brew.sh/api/cask.json
-######################################################################## 100.0%
-==> Fetching dependencies for awscli: openssl@1.1, readline, sqlite, xz, python@3.11, docutils and six
-==> Fetching openssl@1.1
-==> Downloading https://ghcr.io/v2/homebrew/core/openssl/1.1/manifests/1.1.1t
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/openssl/1.1/blobs/sha256:97676d1a616421e472c46fc7930fa4a9ced51
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:97676d1a616421e472c46fc793
-######################################################################## 100.0%
-==> Fetching readline
-==> Downloading https://ghcr.io/v2/homebrew/core/readline/manifests/8.2.1
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/readline/blobs/sha256:abe9d3f3eec3ba2339860faa6a978b9909194c65
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:abe9d3f3eec3ba2339860faa6a
-######################################################################## 100.0%
-==> Fetching sqlite
-==> Downloading https://ghcr.io/v2/homebrew/core/sqlite/manifests/3.40.1
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/sqlite/blobs/sha256:d3092d3c942b50278f82451449d2adc3d1dc1bd724
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:d3092d3c942b50278f82451449
-######################################################################## 100.0%
-==> Fetching xz
-==> Downloading https://ghcr.io/v2/homebrew/core/xz/manifests/5.4.1
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/xz/blobs/sha256:619b87932c5393af72b259b17ee8270275e0e5dc8893bd
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:619b87932c5393af72b259b17e
-######################################################################## 100.0%
-==> Fetching python@3.11
-==> Downloading https://ghcr.io/v2/homebrew/core/python/3.11/manifests/3.11.2-1
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/python/3.11/blobs/sha256:7695af6d6b1bfc7a902ff85b0472b5c94cbc4
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:7695af6d6b1bfc7a902ff85b04
-######################################################################## 100.0%
-==> Fetching docutils
-==> Downloading https://ghcr.io/v2/homebrew/core/docutils/manifests/0.19_1
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/docutils/blobs/sha256:263354453fe6a41c646d4d9b637f71fa5b09ee1d
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:263354453fe6a41c646d4d9b63
-######################################################################## 100.0%
-==> Fetching six
-==> Downloading https://ghcr.io/v2/homebrew/core/six/manifests/1.16.0_3
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/six/blobs/sha256:0dee50367c6facbfc8f65e8a82bcd3e08d43da262b1ad
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:0dee50367c6facbfc8f65e8a82
-######################################################################## 100.0%
-==> Fetching awscli
-==> Downloading https://ghcr.io/v2/homebrew/core/awscli/manifests/2.10.0
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/awscli/blobs/sha256:356d02624a9452047e24e68644ca985b4591dd95a4
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:356d02624a9452047e24e68644
-######################################################################## 100.0%
-==> Installing dependencies for awscli: openssl@1.1, readline, sqlite, xz, python@3.11, docutils and six
-==> Installing awscli dependency: openssl@1.1
-==> Pouring openssl@1.1--1.1.1t.ventura.bottle.tar.gz
-🍺  /usr/local/Cellar/openssl@1.1/1.1.1t: 8,101 files, 18.5MB
-==> Installing awscli dependency: readline
-==> Pouring readline--8.2.1.ventura.bottle.tar.gz
-🍺  /usr/local/Cellar/readline/8.2.1: 50 files, 1.7MB
-==> Installing awscli dependency: sqlite
-==> Pouring sqlite--3.40.1.ventura.bottle.tar.gz
-🍺  /usr/local/Cellar/sqlite/3.40.1: 11 files, 4.4MB
-==> Installing awscli dependency: xz
-==> Pouring xz--5.4.1.ventura.bottle.tar.gz
-🍺  /usr/local/Cellar/xz/5.4.1: 95 files, 1.6MB
-==> Installing awscli dependency: python@3.11
-==> Pouring python@3.11--3.11.2.ventura.bottle.1.tar.gz
-Error: The `brew link` step did not complete successfully
-The formula built, but is not symlinked into /usr/local
-Could not symlink bin/2to3
-Target /usr/local/bin/2to3
-is a symlink belonging to python@3.9. You can unlink it:
-  brew unlink python@3.9
-
-To force the link and overwrite all conflicting files:
-  brew link --overwrite python@3.11
-
-To list all files that would be deleted:
-  brew link --overwrite --dry-run python@3.11
-
-Possible conflicting files are:
-/usr/local/bin/2to3 -> /usr/local/Cellar/python@3.9/3.9.13_1/bin/2to3
-/usr/local/bin/idle3 -> /usr/local/Cellar/python@3.9/3.9.13_1/bin/idle3
-/usr/local/bin/pydoc3 -> /usr/local/Cellar/python@3.9/3.9.13_1/bin/pydoc3
-/usr/local/bin/python3 -> /usr/local/Cellar/python@3.9/3.9.13_1/bin/python3
-/usr/local/bin/python3-config -> /usr/local/Cellar/python@3.9/3.9.13_1/bin/python3-config
-/usr/local/share/man/man1/python3.1 -> /usr/local/Cellar/python@3.9/3.9.13_1/share/man/man1/python3.1
-/usr/local/lib/pkgconfig/python3-embed.pc -> /usr/local/Cellar/python@3.9/3.9.13_1/lib/pkgconfig/python3-embed.pc
-/usr/local/lib/pkgconfig/python3.pc -> /usr/local/Cellar/python@3.9/3.9.13_1/lib/pkgconfig/python3.pc
-/usr/local/Frameworks/Python.framework/Headers -> /usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Headers
-/usr/local/Frameworks/Python.framework/Python -> /usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Python
-/usr/local/Frameworks/Python.framework/Resources -> /usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Resources
-/usr/local/Frameworks/Python.framework/Versions/Current -> /usr/local/Cellar/python@3.9/3.9.13_1/Frameworks/Python.framework/Versions/Current
-==> /usr/local/Cellar/python@3.11/3.11.2/bin/python3.11 -m ensurepip
-==> /usr/local/Cellar/python@3.11/3.11.2/bin/python3.11 -m pip install -v --no-deps --no-index --upgrade --isol
-==> Summary
-🍺  /usr/local/Cellar/python@3.11/3.11.2: 3,176 files, 61.4MB
-==> Installing awscli dependency: docutils
-==> Pouring docutils--0.19_1.ventura.bottle.tar.gz
-🍺  /usr/local/Cellar/docutils/0.19_1: 231 files, 2MB
-==> Installing awscli dependency: six
-==> Pouring six--1.16.0_3.all.bottle.tar.gz
-🍺  /usr/local/Cellar/six/1.16.0_3: 20 files, 122.4KB
-==> Installing awscli
-==> Pouring awscli--2.10.0.ventura.bottle.tar.gz
-==> Caveats
-The "examples" directory has been installed to:
-  /usr/local/share/awscli/examples
-
-zsh completions and functions have been installed to:
-  /usr/local/share/zsh/site-functions
-==> Summary
-🍺  /usr/local/Cellar/awscli/2.10.0: 13,172 files, 115.1MB
-==> Running `brew cleanup awscli`...
-Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
-Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
-==> Upgrading 2 dependents of upgraded formulae:
-Disable this behaviour by setting HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK.
-Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
-python@3.9 3.9.13_1 -> 3.9.16, python-tk@3.9 3.9.13 -> 3.9.16
-==> Fetching python@3.9
-==> Downloading https://ghcr.io/v2/homebrew/core/python/3.9/manifests/3.9.16
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/python/3.9/blobs/sha256:06e42063af5803d934d891dbd15748ab156c54
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:06e42063af5803d934d891dbd1
-######################################################################## 100.0%
-==> Fetching dependencies for python-tk@3.9: tcl-tk
-==> Fetching tcl-tk
-==> Downloading https://ghcr.io/v2/homebrew/core/tcl-tk/manifests/8.6.13
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/tcl-tk/blobs/sha256:afd13198b0dbcc0eb4352614129f1cb06a614cea6d
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:afd13198b0dbcc0eb435261412
-######################################################################## 100.0%
-==> Fetching python-tk@3.9
-==> Downloading https://ghcr.io/v2/homebrew/core/python-tk/3.9/manifests/3.9.16
-######################################################################## 100.0%
-==> Downloading https://ghcr.io/v2/homebrew/core/python-tk/3.9/blobs/sha256:232df696df869d89550c0b3142b718f1743
-==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:232df696df869d89550c0b3142
-######################################################################## 100.0%
-==> Upgrading python@3.9
-  3.9.13_1 -> 3.9.16
-
-==> Pouring python@3.9--3.9.16.ventura.bottle.tar.gz
-==> /usr/local/Cellar/python@3.9/3.9.16/bin/python3.9 -m ensurepip
-==> /usr/local/Cellar/python@3.9/3.9.16/bin/python3.9 -m pip install -v --no-deps --no-index --upgrade --isolat
-==> Caveats
-Python has been installed as
-  /usr/local/bin/python3.9
-
-Unversioned and major-versioned symlinks `python`, `python3`, `python-config`, `python3-config`, `pip`, `pip3`, etc. pointing to
-`python3.9`, `python3.9-config`, `pip3.9` etc., respectively, have been installed into
-  /usr/local/opt/python@3.9/libexec/bin
-
-You can install Python packages with
-  pip3.9 install <package>
-They will install into the site-package directory
-  /usr/local/lib/python3.9/site-packages
-
-tkinter is no longer included with this formula, but it is available separately:
-  brew install python-tk@3.9
-
-If you do not need a specific version of Python, and always want Homebrew's `python3` in your PATH:
-  brew install python3
-
-See: https://docs.brew.sh/Homebrew-and-Python
-==> Summary
-🍺  /usr/local/Cellar/python@3.9/3.9.16: 3,066 files, 55.4MB
-==> Running `brew cleanup python@3.9`...
-Removing: /usr/local/Cellar/python@3.9/3.9.13_1... (3,130 files, 56.2MB)
-==> Upgrading python-tk@3.9
-  3.9.13 -> 3.9.16
-
-==> Installing dependencies for python-tk@3.9: tcl-tk
-==> Installing python-tk@3.9 dependency: tcl-tk
-==> Pouring tcl-tk--8.6.13.ventura.bottle.tar.gz
-🍺  /usr/local/Cellar/tcl-tk/8.6.13: 3,070 files, 52.8MB
-==> Installing python-tk@3.9
-==> Pouring python-tk@3.9--3.9.16.ventura.bottle.tar.gz
-🍺  /usr/local/Cellar/python-tk@3.9/3.9.16: 5 files, 132.6KB
-==> Running `brew cleanup python-tk@3.9`...
-Removing: /usr/local/Cellar/python-tk@3.9/3.9.13... (5 files, 132.7KB)
-==> Checking for dependents of upgraded formulae...
-==> No broken dependents found!
-==> Caveats
-==> awscli
-The "examples" directory has been installed to:
-  /usr/local/share/awscli/examples
-
-zsh completions and functions have been installed to:
-  /usr/local/share/zsh/site-functions
-==> python@3.9
-Python has been installed as
-  /usr/local/bin/python3.9
-
-Unversioned and major-versioned symlinks `python`, `python3`, `python-config`, `python3-config`, `pip`, `pip3`, etc. pointing to
-`python3.9`, `python3.9-config`, `pip3.9` etc., respectively, have been installed into
-  /usr/local/opt/python@3.9/libexec/bin
-
-You can install Python packages with
-  pip3.9 install <package>
-They will install into the site-package directory
-  /usr/local/lib/python3.9/site-packages
-
-tkinter is no longer included with this formula, but it is available separately:
-  brew install python-tk@3.9
-
-If you do not need a specific version of Python, and always want Homebrew's `python3` in your PATH:
-  brew install python3
-
-See: https://docs.brew.sh/Homebrew-and-Python
+```sh
+tasks:
+  - name: aws-cli
+    env:
+      AWS_CLI_AUTO_PROMPT: on-partial
+    init: |
+      cd /workspace
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      cd $THEIA_WORKSPACE_ROOT
 ```
 
-As instrcuted intalled `Python3` as well with command
+We'll also run these commands indivually to perform the install manually
 
+### Create a new User and Generate AWS Credentials
+
+- Go to (IAM Users Console](https://us-east-1.console.aws.amazon.com/iamv2/home?region=us-east-1#/users) andrew create a new user
+- `Enable console access` for the user
+- Create a new `Admin` Group and apply `AdministratorAccess`
+- Create the user and go find and click into the user
+- Click on `Security Credentials` and `Create Access Key`
+- Choose AWS CLI Access
+- Download the CSV with the credentials
+
+### Set Env Vars
+
+We will set these credentials for the current bash terminal
 ```
- ❯ brew install python3
-Warning: python@3.11 3.11.2 is already installed, it's just not linked.
-To link this version, run:
-  brew link python@3.11
-❯ brew link python@3.11
-Linking /usr/local/Cellar/python@3.11/3.11.2... 21 symlinks created.
+export AWS_ACCESS_KEY_ID=""
+export AWS_SECRET_ACCESS_KEY=""
+export AWS_DEFAULT_REGION=us-east-1
 ```
 
-![Proof here](assets/AWS-CLI-Install-and-verify.png)
+We'll tell Gitpod to remember these credentials if we relaunch our workspaces
+```
+gp env AWS_ACCESS_KEY_ID=""
+gp env AWS_SECRET_ACCESS_KEY=""
+gp env AWS_DEFAULT_REGION=us-east-1
+```
+
+### Check that the AWS CLI is working and you are the expected user
+
+```sh
+aws sts get-caller-identity
+```
+
+Received the output as: (I am showing sampple Account number here ofr security reasons)
+```json
+{
+    "UserId": "AIDAXXAMHQ443QG2N3EEA",
+    "Account": "5304541202499",
+    "Arn": "arn:aws:iam::5304541202499:user/equinox9"
+}
+```
+
+## Enable Billing 
+
+We need to turn on Billing Alerts to recieve alerts...
+
+
+- In your Root Account go to the [Billing Page](https://console.aws.amazon.com/billing/)
+- Under `Billing Preferences` Choose `Receive Billing Alerts`
+- Save Preferences
+
+
+## Creating a Billing Alarm
+
+### Create SNS Topic
+
+- We need an SNS topic before we create an alarm.
+- The SNS topic is what will delivery us an alert when we get overbilled
+- [aws sns create-topic](https://docs.aws.amazon.com/cli/latest/reference/sns/create-topic.html)
+
+We'll create a SNS Topic
+```sh
+aws sns create-topic --name billing-alarm
+```
+which will return a TopicARN
+
+We'll create a subscription supply the TopicARN and our Email
+```sh
+aws sns subscribe \
+    --topic-arn TopicARN \
+    --protocol email \
+    --notification-endpoint your@email.com
+```
+
+Check your email and confirm the subscription
+
+#### Create Alarm
+
+- [aws cloudwatch put-metric-alarm](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/put-metric-alarm.html)
+- [Create an Alarm via AWS CLI](https://aws.amazon.com/premiumsupport/knowledge-center/cloudwatch-estimatedcharges-alarm/)
+- We need to update the configuration json script with the TopicARN we generated earlier
+- We are just a json file because --metrics is is required for expressions and so its easier to us a JSON file.
+
+```sh
+aws cloudwatch put-metric-alarm --cli-input-json file://aws/json/alarm_config.json
+```
+
+## Create an AWS Budget
+
+[aws budgets create-budget](https://docs.aws.amazon.com/cli/latest/reference/budgets/create-budget.html)
+
+Get your AWS Account ID
+```sh
+aws sts get-caller-identity --query Account --output text
+```
+
+- Supply your AWS Account ID
+- Update the json files
+- This is another case with AWS CLI its just much easier to json files due to lots of nested json
+
+```sh
+aws budgets create-budget \
+    --account-id AccountID \
+    --budget file://aws/json/budget.json \
+    --notifications-with-subscribers file://aws/json/budget-notifications-with-subscribers.json
+```
 
 <hr>
 ## HOMEWORK CHALLENGES
