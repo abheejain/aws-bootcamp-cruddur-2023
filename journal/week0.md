@@ -4,16 +4,30 @@
 
 ### Pre-requisites for this week
 
-Getting all the information and th base to be crated from the reference videos from ExamPro Playlist on YouTube, which includes:
+Getting all the information and th base to be crated from the reference videos from ExamPro Playlist on YouTube, which includes Videos
+- Chirag's Week 0 - Spend Considerations
+- Ashish's Week 0 - Security Considerations
 
 ## The Homework Tasks for Week0
 
 ### Recreate Conceptual Diagram in Lucid Charts or on a Napkin
-<Image coming sooon>
+
+## Verificaton Image
+
+![Cruddur ConceptualDiagram Napkin](assets/week-0/Cruddur-ConceptualDiagram-Napkin.png)
+
+
+Link to the Lucidchart file: [Conceptual-Diagram-Napkin](https://lucid.app/lucidchart/bb00a564-d795-4a8a-9853-fa7bc77510f4/edit?viewport_loc=-359%2C-51%2C2128%2C1009%2C0_0&invitationId=inv_fc7fbf1d-ee1e-4549-ba40-b1759ee9ff01)
+
+![Cruddur ConceptualDiagram](assets/week-0/Cruddur-Conceptual-Diagram.png)
 
 ### Recreate Logical Architectual Diagram in Lucid Charts
-<Image coming sooon>
+## Verificaton Image
+![Cruddur Logical Diagram](assets/week-0/Cruddur-Logical-Diagram.png)
 
+Link to the Lucidchart file: [Logical-Diagram](https://lucid.app/lucidchart/d275d5fb-6f7d-4bea-bb2d-4e7d7c330e0d/edit?viewport_loc=-1701%2C-286%2C2160%2C1024%2C0_0&invitationId=inv_ca9fd736-ffe9-4d02-bd36-21fbc06d7503)
+
+<hr>
 
 AWS CLI is most ofter and widely used for working with AWS commands using a command prompt. We will start with installing the AWS CLI
 
@@ -81,7 +95,13 @@ Received the output as: (I am showing sampple Account number here ofr security r
     "Arn": "arn:aws:iam::5304541202499:user/equinox9"
 }
 ```
+<hr>
+  
+## Verificaton Image
+  
+![AWS STS Caller Identity](assets/week-0/aws-sts-caller-identity.png)
 
+<hr>
 ## Enable Billing 
 
 We need to turn on Billing Alerts to recieve alerts...
@@ -116,6 +136,11 @@ aws sns subscribe \
 
 Check your email and confirm the subscription
 
+## Verificaton Image
+![SNS Confirmation](assets/week-0/AWS-SNS-Subscription-Confirmed.png)
+
+
+
 #### Create Alarm
 
 - [aws cloudwatch put-metric-alarm](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/put-metric-alarm.html)
@@ -126,6 +151,10 @@ Check your email and confirm the subscription
 ```sh
 aws cloudwatch put-metric-alarm --cli-input-json file://aws/json/alarm_config.json
 ```
+## Verificaton Image
+![Alarm Confirmation](assets/week-0/aws-alarm-set-confirm.png)
+
+<hr> 
 
 ## Create an AWS Budget
 
@@ -146,11 +175,18 @@ aws budgets create-budget \
     --budget file://aws/json/budget.json \
     --notifications-with-subscribers file://aws/json/budget-notifications-with-subscribers.json
 ```
+## Verificaton Image
+
+![Budget Confirmation](assets/week-0/aws-budget-set-confirm.png)
+
 
 <hr>
 ## HOMEWORK CHALLENGES
 
+To be added soon
 <hr>
 ## ADDITIONAL HOMEWORK CHALLENGES
+
+To be added soon
 
 <hr>
