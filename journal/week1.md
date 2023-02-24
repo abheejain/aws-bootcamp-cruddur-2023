@@ -36,6 +36,12 @@ Proof of the Frontend Container running
 
 ![Backend Endpoint for Notifications](assets/week-1/week1-Cruddur-Backend-Endpoint-for-Notifications.png)
 
+Finished bare minimum to start for Week 2 :) 
+
+## Verificaton Image
+
+![Backend Endpoint for Notifications](assets/week-1/week1-Cruddur-Frontend-Notifications-Done.png)
+
 <hr> 
 
 ## Write a React Page for Notifications
