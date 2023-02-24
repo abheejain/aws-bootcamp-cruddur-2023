@@ -24,9 +24,17 @@ Proof of the Frontend Container running
 
 ## Document the Notification Endpoint for the OpenAI Document
 
+## Verificaton Image
+
+![Document the Notification Endpoint for the OpenAI Document](assets/week-1/week1-Cruddur-notifications-api-added.png)
+
 <hr>
 
 ## Write a Flask Backend Endpoint for Notifications 
+
+## Verificaton Image
+
+![Backend Endpoint for Notifications](assets/week-1/week1-Cruddur-Backend-Endpoint-for-Notifications.png)
 
 <hr> 
 
