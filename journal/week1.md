@@ -50,9 +50,18 @@ Finished bare minimum to start for Week 2 :)
 
 ## Run DynamoDB Local Container and ensure it works
 
+## Verificaton Image
+
+![DynamoDB Locally](assets/week-1/week1-dynamoDB-local-done.png)
+
 <hr>
 
 
 ## Run Postgres Container and ensure it works
+
+## Verificaton Image
+
+![Postgres Locally](assets/week-1/week1-backend-postgres-connected.png)
+
 
 <hr>
