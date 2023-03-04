@@ -38,3 +38,34 @@ Various Queries run and results received for `app.data` and `app_results_length`
 ![Query ](assets/week-2/week2-honeycomb-querry-P90ms.png)
 
 <hr>
+
+## Instrument AWS X-Ray into backend flask application
+
+- Setup X-Ray Traces 
+After receiving JSON log 
+https://ap-southeast-1.console.aws.amazon.com/cloudwatch/home?region=ap-southeast-1#xray:settings/groups
+
+## Verificaton Image
+![Setup X-Ray-Traces ](assets/week-2/week2-aws-xray-added-xray-traces.png)
+
+
+- Added Sampling Rules using `AWS CLI`
+    We used CLI, compared to the AWS Console because, the interface keep changing, but we know the values to set using CLI is easy.
+
+## Verificaton Image
+![Setup Sampling Rules using CLI ](assets/week-2/week2-aws-xray-added-sampleing-rule.png)
+
+<hr>
+
+
+## X-Ray Instrumented
+
+## Verificaton Image
+![AWS X-Ry INstrumented ](assets/week-2/week2-aws-xray-added-xray-instrumented.png)
+
+<hr>
+
+## Add X-Ray sub-segment
+
+Ref: https://github.com/aws/aws-xray-sdk-python
+Tried to workput with the `UserActivities` service, but received `500` error`. I would skip now and keep it for my extended homework 
