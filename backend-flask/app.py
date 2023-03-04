@@ -40,8 +40,9 @@ processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 
 # X-Ray -----
-xray_url = os.getenv("AWS_XRAY_URL")
-xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
+# Remvoed for cost saving
+# xray_url = os.getenv("AWS_XRAY_URL")
+# xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 
 # show this in the logs within the backend-flask app (STDOUT) 
 simple_processor = SimpleSpanProcessor(ConsoleSpanExporter)
@@ -55,7 +56,8 @@ app = Flask(__name__)
 
 
 # X-Ray -----
-XRayMiddleware(app, xray_recorder)
+# Remvoed for cost saving
+# XRayMiddleware(app, xray_recorder)
 
 
 # Honeycomb ----------
@@ -65,13 +67,14 @@ RequestsInstrumentor().instrument()
 
 # Cloudwatch -----
 # Configuring Logger to Use CloudWatch
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.DEBUG)
-console_handler = logging.StreamHandler()
-cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
-LOGGER.addHandler(console_handler)
-LOGGER.addHandler(cw_handler)
-LOGGER.info("Test log")
+# Removed the LOGGER to avoid the Cost 
+# LOGGER = logging.getLogger(__name__)
+# LOGGER.setLevel(logging.DEBUG)
+# console_handler = logging.StreamHandler()
+# cw_handler = watchtower.CloudWatchLogHandler(log_group='cruddur')
+# LOGGER.addHandler(console_handler)
+# LOGGER.addHandler(cw_handler)
+# LOGGER.info("Test log")
 
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
@@ -86,11 +89,12 @@ cors = CORS(
 
 
 # Cloudwatch ----- Error message
-@app.after_request
-def after_request(response):
-    timestamp = strftime('[%Y-%b-%d %H:%M]')
-    LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
-    return response
+# Disabled for cost saving
+# @app.after_request
+# def after_request(response):
+#    timestamp = strftime('[%Y-%b-%d %H:%M]')
+#    LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
+#    return response
 
 
 @app.route("/api/message_groups", methods=['GET'])
@@ -130,7 +134,7 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
-  data = HomeActivities.run(logger=LOGGER) # fix for Cloudwatch Log
+  data = HomeActivities.run() # fix for Cloudwatch Log and removed now to avoid cost
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])

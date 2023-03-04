@@ -4,8 +4,8 @@ from opentelemetry import trace
 tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
-  def run(logger):
-    logger.info("HomeActivities")
+  def run(): # removed (logger) to avoid cost
+    #logger.info("HomeActivities")
     #LOGGER.info('Hello Cloudwatch! from  /api/activities/home')
     with tracer.start_as_current_span("home-activities-mock-data"):
       span = trace.get_current_span()
