@@ -83,3 +83,25 @@ Tried to workput with the `UserActivities` service, but received `500` error`. I
 
 <hr>
 
+
+## Integrate Rollbar for Error Logging
+
+## Verificaton Image
+![Roll Integration ](assets/week-2/week2-rollbar-setup.png)
+
+New UI More events
+## Verificaton Image
+![Rollbar Integration2 ](assets/week-2/week2-rollbar-integration-new-ui.png)
+
+
+<hr>
+
+## Trigger an error an observe an error with Rollbar
+## Verificaton Image
+![Rollbar Integration ](assets/week-2/week2-rollbar-trigger-error.png)
+ 
+Error Details
+## Verificaton Image
+![Rollbar Integration ](assets/week-2/week2-rollbar-trigger-error-details.png)
+
+<hr>
