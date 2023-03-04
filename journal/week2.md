@@ -69,3 +69,17 @@ https://ap-southeast-1.console.aws.amazon.com/cloudwatch/home?region=ap-southeas
 
 Ref: https://github.com/aws/aws-xray-sdk-python
 Tried to workput with the `UserActivities` service, but received `500` error`. I would skip now and keep it for my extended homework 
+
+<hr>
+
+## Cloudwatch Instrumented
+## Verificaton Image
+![AWS Cloudwatch Log ](assets/week-2/week2-aws-cloudwatch-log1.png)
+
+### Home Activities Cloudwatch Logs
+
+## Verificaton Image
+![AWS Cloudwatch Home Activities ](assets/week-2/week2-aws-cloudwatch-log-home-activities.png)
+
+<hr>
+
