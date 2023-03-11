@@ -11,7 +11,7 @@ Proof of the AWS Cognito Pool Creation
 Proof of the AWS Cognito Pool Details 
 ## Verificaton Image
 
-![Cognito Pool Creation](assets/week-3/Week3-Cognito-user-pool-details-after-error)
+![Cognito Pool Creation](assets/week-3/Week3-Cognito-user-pool-details-after-error.png)
 
 <hr>
 
