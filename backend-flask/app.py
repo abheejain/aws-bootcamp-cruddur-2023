@@ -168,6 +168,11 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
+  # how-to-get-http-headers-in-flask
+  print('AUTH Header -----')
+  print(
+    request.headers.get('Authorization')
+  )
   data = HomeActivities.run() # fix for Cloudwatch Log and removed now to avoid cost
   return data, 200
 

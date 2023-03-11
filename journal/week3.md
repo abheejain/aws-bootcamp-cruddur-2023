@@ -147,4 +147,8 @@ NOTE: The verification is done for the `Signin Page`, and it is not good practic
 
 ## Watch about different approaches to verifying JWTs
 
+- how-to-get-http-headers-in-flask
+Ref: https://stackoverflow.com/questions/29386995/how-to-get-http-headers-in-flask
+
+
 <hr>
