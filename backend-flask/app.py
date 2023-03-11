@@ -15,6 +15,8 @@ from flask import got_request_exception
 import watchtower
 import logging
 
+from lib.cognito_jwt_token import CognitoJwtToken
+
 from services.home_activities import *
 from services.notifications_activities import *
 from services.user_activities import *
@@ -64,7 +66,11 @@ tracer = trace.get_tracer(__name__)
 
 app = Flask(__name__)
 
-
+cognito_jwt_token = CognitoJwtToken(
+  user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"),
+  user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"),
+  region=os.getenv("AWS_DEFAULT_REGION")
+)
 # X-Ray -----
 # Remvoed for cost saving
 # XRayMiddleware(app, xray_recorder)
@@ -168,7 +174,17 @@ def data_create_message():
   return
 
 @app.route("/api/activities/home", methods=['GET'])
+@xray_recorder.capture('activities_home')
 def data_home():
+  access_token = cognito_jwt_token.extract_access_token(request.headers)
+  try:
+    claims = cognito_jwt_token.token_service.verify(access_token)
+    # self.claims = self.token_service.claims
+    # g.cognito_claims = self.claims
+  except TokenVerifyError as e:
+    _ = request.data
+    abort(make_response(jsonify(message=str(e)), 401))
+
   # how-to-get-http-headers-in-flask
   #print('AUTH Header -----',file-sys.stdout)
   app.logger.debug("AUTH HEADER")
@@ -176,6 +192,10 @@ def data_home():
     request.headers.get('Authorization')
   )
   data = HomeActivities.run() # fix for Cloudwatch Log and removed now to avoid cost
+
+  claims = aws.auth.claims
+  app.logger.debug('Claims')
+  app.logger.debug(claims)
   return data, 200
 
 @app.route("/api/activities/notifications", methods=['GET'])

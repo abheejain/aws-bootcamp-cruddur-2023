@@ -147,8 +147,22 @@ NOTE: The verification is done for the `Signin Page`, and it is not good practic
 
 ## Watch about different approaches to verifying JWTs
 
-- how-to-get-http-headers-in-flask
+- how-to-get-http-headers-in-flask (Code COmmitted)
 Ref: https://stackoverflow.com/questions/29386995/how-to-get-http-headers-in-flask
 
+- Next To add FLASJ-AWSCOgnito TOKEN
+Ref: https://github.com/cgauge/Flask-AWSCognito 
+Ref: https://github.com/cgauge/Flask-AWSCognito/blob/master/flask_awscognito/services/token_service.py
+
+Note: A common URL to get the `jwks.json`
+https://cognito-idp.{self.region}.amazonaws.com/{self.user_pool_id}/.well-known/jwks.json
+
+So According to https://github.com/cgauge/Flask-AWSCognito
+We crated ENV Variables in `Docker-Compose`in `backend` block
+
+```
+app.config['AWS_COGNITO_USER_POOL_ID'] = 'eu-west-1_XXX'
+app.config['AWS_COGNITO_USER_POOL_CLIENT_ID'] = 'YYY'
+```
 
 <hr>
