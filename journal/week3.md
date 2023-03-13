@@ -164,5 +164,15 @@ We crated ENV Variables in `Docker-Compose`in `backend` block
 app.config['AWS_COGNITO_USER_POOL_ID'] = 'eu-west-1_XXX'
 app.config['AWS_COGNITO_USER_POOL_CLIENT_ID'] = 'YYY'
 ```
+## Finally got the `User Authenticated` 
+
+```
+[2023-03-13 16:57:42,084] DEBUG in app: authenicated
+[2023-03-13 16:57:42,084] DEBUG in app: {'sub': '7a2c9178-0cac-4635-ac31-c44a4c14c043', 'iss': 'https://cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_jiRQOZ7SS', 'client_id': '7p3n1sa7ea43n6q205g82fnu9', 'origin_jti': 'd1b2362d-3763-4215-8a74-200b2d32d932', 'event_id': '54065754-53b0-40fa-9e44-3d3e4acb55a8', 'token_use': 'access', 'scope': 'aws.cognito.signin.user.admin', 'auth_time': 1678726660, 'exp': 1678730260, 'iat': 1678726660, 'jti': 'f7ca19d1-718e-4a66-b4ad-1b46670c0786', 'username': '7a2c9178-0cac-4635-ac31-c44a4c14c043'}
+[2023-03-13 16:57:42,084] DEBUG in app: 7a2c9178-0cac-4635-ac31-c44a4c14c043
+192.168.195.11 - - [13/Mar/2023 16:57:42] "GET /api/activities/home HTTP/1.1" 200 -
+```
+## Verificaton Image
+![authenicated and Verified](assets/week-3/Week3-Cognito-JWT-Authenticated.png)
 
 <hr>
