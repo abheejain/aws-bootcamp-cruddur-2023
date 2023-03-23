@@ -4,8 +4,8 @@ INSERT INTO public.activities (
   expires_at
 )
 VALUES (
-  (SELECT uuid 
-    FROM public.users 
+  (SELECT uuid
+    FROM public.users
     WHERE users.handle = %(handle)s
     LIMIT 1
   ),
