@@ -41,11 +41,23 @@ Proof of the RDS Postgres Instance Creation
 ## Create Congito Trigger to insert user into database
 ## Verificaton Image
 
+</hr>
+### Notes: 
+`Configuration` -  `Permissions`
+The provided execution role does not have permissions to call CreateNetworkInterface on EC2
+
+So need to Add Policy in addition to the existing `Configuration` - `Permissions` - Role - `roles/cruddur-post-confirmation-role-a2i0hdsu`
+
+Created new Policy and attached 
+Ref: https://stackoverflow.com/questions/41177965/aws-lambdathe-provided-execution-role-does-not-have-permissions-to-call-describ
+
+Managed Policy Created: `AWS-Lambda-VPC-Access-Execution-Role`
+</hr>
+
 ![User Created](assets/week-4/week4-post-cofirmation-lambda-User-Created.png)
 
 
 ![User Created CLI](assets/week-4/week4-post-cofirmation-lambda-User-Created-x-on.png)
-
 
 
 </hr>
