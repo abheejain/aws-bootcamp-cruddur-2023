@@ -23,7 +23,7 @@ tasks:
       cd backend-flask
       pip install -r requirements.txt
   - name: react-js
-    command: 
+    command: | 
       cd frontend-react-js
       npm i
 vscode:
