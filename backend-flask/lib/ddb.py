@@ -103,6 +103,7 @@ class Ddb:
       'message': message,
       'created_at': created_at
     }
+  
   def create_message_group(client, message,my_user_uuid, my_user_display_name, my_user_handle, other_user_uuid, other_user_display_name, other_user_handle):
     print('== create_message_group.1')
     table_name = 'cruddur-messages'
