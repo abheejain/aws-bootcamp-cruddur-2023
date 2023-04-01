@@ -100,7 +100,7 @@ create_message_group(
   other_user_handle=users['other_user']['handle'],
   other_user_display_name=users['other_user']['display_name'],
   last_message_at=now.isoformat(),
-  message="this is a filler message from Abheeshek"
+  message="this is a filler message"
 )
 
 create_message_group(

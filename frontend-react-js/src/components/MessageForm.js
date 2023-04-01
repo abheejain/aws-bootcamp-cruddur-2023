@@ -25,6 +25,7 @@ export default function ActivityForm(props) {
       } else {
         json.message_group_uuid = params.message_group_uuid
       }
+
       const res = await fetch(backend_url, {
         method: "POST",
         headers: {
@@ -32,14 +33,10 @@ export default function ActivityForm(props) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          message: message,
-          user_receiver_handle: params.handle
-        }),
+        body: JSON.stringify(json)
       });
       let data = await res.json();
       if (res.status === 200) {
-        props.setMessages(current => [...current,data]);
         console.log('data:',data)
         if (data.message_group_uuid) {
           console.log('redirect to message group')
