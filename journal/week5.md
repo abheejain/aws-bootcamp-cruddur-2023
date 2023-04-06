@@ -12,12 +12,25 @@
 </hr>
 
 ## Data Modelling
+Referring the to the Diagram pereapred by the mnentor Andrew presented here https://lucid.app/lucidchart/8f58a19d-3821-4529-920f-5bb802d6c6a3/edit?invitationId=inv_e47bc316-9caa-4aee-940f-161e01e22715&page=0_0# , the data access model can be break down into four patterns and to put in our DynamoDB table.:
+
+1. Pattern A for showing messages. Users can see a list of messages that belong to a message group.
+2. Pattern B for showing message groups. Users can see a list of message groups so they can check the other persons they have been talking to.
+3. Pattern C for creating a new message in a new message group.
+4. Pattern D for creating a new message in an existing message group.
+
 
 
 ## Backend Preparation
 
 Setting up AWS Boto3 for Dynamodb local setup
 Ref: https://boto3.amazonaws.com/v1/documentation/
+
+### Verificaton Image
+
+![RDS Creation](assets/week-5/week5-local-ddb.png)
+
+</hr>
 
 
 Creatng New Item in DynamoDB
@@ -27,13 +40,18 @@ AWS CLI - DynamDB List Tables
 https://docs.aws.amazon.com/cli/latest/reference/dynamodb/index.html
 https://docs.aws.amazon.com/cli/latest/reference/dynamodb/list-tables.html
 
+### Verificaton Image
+
+![RDS Creation](assets/week-5/week5-local-ddb-list-table.png)
+
+</hr>
 
 
 delete-table
 https://docs.aws.amazon.com/cli/latest/reference/dynamodb/delete-table.html
 
 
-/hr> 
+</hr> 
 
 ## DynamoDB Utility Scripts
 
@@ -243,21 +261,18 @@ deleting table: cruddur-message
 
 
 Seeding data in DDB
-REF to the Dat Modeling 
+REF to the Data Modeling 
 
-pk				sk (created_at or last_reply_at)
+pk				                sk (created_at or last_reply_at)
 MSG#{message_group_uuid}		MSG#{created_at}
-GRP#{my_user_uuid}		GRP#{last_reply_at}
-GRP#{my_user_uuid}		GRP#{last_reply_at}
+GRP#{my_user_uuid}		        GRP#{last_reply_at}
+GRP#{my_user_uuid}		        GRP#{last_reply_at}
 
 
+- Created with `seed`
 
-1:07:13 
-Created with 
-seed
-
-I got error
-
+## I got error
+```
 gitpod /workspace/aws-bootcamp-cruddur-2023/backend-flask (main) $ ./bin/ddb/seed
 import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/359.
 import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/359.
@@ -266,10 +281,11 @@ import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/3
 import-im6.q16: unable to open X server `' @ error/import.c/ImportImageCommand/359.
 ./bin/ddb/seed: line 7: syntax error near unexpected token `('
 ./bin/ddb/seed: line 7: `current_path = os.path.dirname(os.path.abspath(__file__))'
+```
 
-Fixed with correcting the path '..'
+- Fixed with correcting the path '..'
 
-Now can `seed` the data and `scan` as well 
+- Now can `seed` the data and `scan` as well 
 ```
 ./bin/ddb/seed
 
@@ -277,7 +293,7 @@ Now can `seed` the data and `scan` as well
 
 ```
 
-Next to Fix for the Read and Write for DynamDB
+- Next to Fix for the Read and Write for DynamDB
 
 ```
 gitpod /workspace/aws-bootcamp-cruddur-2023/backend-flask (main) $ chmod u+x bin/ddb/patterns/get-conversation
@@ -443,6 +459,11 @@ andrewbrown 2023-03-28 09:01 PM   And Zathras was just one example of that...
 bayko       2023-03-28 09:02 PM   Definitely. I think his character is a g...
 ```
 
+### Verificaton Image
+
+![Get Conversation](assets/week-5/week5-local-dbd-get-conversation.png)
+
+</hr>
 
 
 Note: 'KeyConditionExpression': 'pk = :pk AND begins_with(sk,:year)',
@@ -523,6 +544,12 @@ my-uuid: 9ad98342-8f75-4b56-a514-1c8f48e800d1
 ```
 </hr> 
 
+### Verificaton Image
+
+![Utility SCript Working with DynamoDB](assets/week-5/week5-ddb-utility-scripts-working-for-access-patterns.png)
+
+</hr>
+
 ### Finished Utility scripts working with DynamoDB 
 </hr>
 
@@ -536,7 +563,11 @@ AWS CLI
 ```
 aws cognito-idp - list-users --user-pool-id=ap-southeast-1_jiRQXXXXXXX
 ```
-week5-cognito-list-users.png 
+## Verificaton Image
+
+![Cognito LIst user ](assets/week-5/week5-cognito-list-users.png)
+
+</hr>
 
 
 Will ist users, but we want to fetch using SDK
@@ -620,6 +651,13 @@ gitpod /workspace/aws-bootcamp-cruddur-2023/backend-flask (main) $
 
 - Issue of Messages not showing after all setup 
 
+## Verificaton Image
+
+![Getting with Group UUID](assets/week-5/week5-list-messages-with-group-uuid-url.png)
+
+</hr>
+
+
 - To resolve that, according to the Discord community help, I needed to change the `my_handle`
 
 - so Changed  my_handle in ddb/seed 
@@ -644,9 +682,31 @@ DROP DATABASE <mydbname>;
 
 https://3000-abheejain-awsbootcampcr-5vhi0gh6ozh.ws-us93.gitpod.io/messages/5ae290ed-55d1-47a0-bc6d-fe2bc2700399
 
+## Verificaton Image
+
+![Message Group UUID Acheived](assets/week-5/week5-list-messages-with-group-uuid-Achieved.png)
+
+</hr>
+
 
 - Now need to implement the code on server-side
+
+## Verificaton Image
+
+![MessageShown](assets/week-5/week5-list-messages-Shown-finally.png)
+
+</hr>
+
+
 - Now can see the messages sent 
+
+## Verificaton Image
+
+![Message Sent Final](assets/week-5/week5-Message-sent-final.png)
+
+</hr>
+
+
 
 
 ## Create a New Conversation 
@@ -659,6 +719,13 @@ INSERT 0 1
 
 ```
 
+## Verificaton Image
+
+![New Conversation](assets/week-5/week5-Added-New-conversation.png)
+
+</hr>
+
+
 ```
 https://3000-abheejain-awsbootcampcr-5vhi0gh6ozh.ws-us93.gitpod.io/messages/new/londo
 ```
@@ -668,10 +735,17 @@ Redirected to
 https://3000-abheejain-awsbootcampcr-5vhi0gh6ozh.ws-us93.gitpod.io/messages/29eaa2a5-e6e8-4124-a08f-a58a332c46ba
 ```
 
-</ hr>
+## Verificaton Image
+
+![New Conversation Done](assets/week-5/week5-Added-New-conversation-Finished.png)
+
+</hr>
 
 
 ## Implement DynamoDB Stream with AWS Lambda
+
+
+- We setup the 
 
 ## IMP IMP Need to make sure postgres database exists first
 Ref: Thread : `DynamoDB Stream implementation error`
@@ -723,6 +797,21 @@ gitpod /workspace/aws-bootcamp-cruddur-2023/backend-flask (main) $ ./bin/ddb/sch
 {'TableDescription': {'AttributeDefinitions': [{'AttributeName': 'message_group_uuid', 'AttributeType': 'S'}, {'AttributeName': 'pk', 'AttributeType': 'S'}, {'AttributeName': 'sk', 'AttributeType': 'S'}], 'TableName': 'cruddur-messages', 'KeySchema': [{'AttributeName': 'pk', 'KeyType': 'HASH'}, {'AttributeName': 'sk', 'KeyType': 'RANGE'}], 'TableStatus': 'CREATING', 'CreationDateTime': datetime.datetime(2023, 4, 1, 15, 55, 23, 389000, tzinfo=tzlocal()), 'ProvisionedThroughput': {'NumberOfDecreasesToday': 0, 'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}, 'TableSizeBytes': 0, 'ItemCount': 0, 'TableArn': 'arn:aws:dynamodb:ap-southeast-1:530454120249:table/cruddur-messages', 'TableId': '2fcf335b-fd38-4df4-ac6a-f52f4861c157', 'GlobalSecondaryIndexes': [{'IndexName': 'message-group-sk-index', 'KeySchema': [{'AttributeName': 'message_group_uuid', 'KeyType': 'HASH'}, {'AttributeName': 'sk', 'KeyType': 'RANGE'}], 'Projection': {'ProjectionType': 'ALL'}, 'IndexStatus': 'CREATING', 'ProvisionedThroughput': {'NumberOfDecreasesToday': 0, 'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}, 'IndexSizeBytes': 0, 'ItemCount': 0, 'IndexArn': 'arn:aws:dynamodb:ap-southeast-1:530454120249:table/cruddur-messages/index/message-group-sk-index'}], 'DeletionProtectionEnabled': False}, 'ResponseMetadata': {'RequestId': 'H9OFQP4LVAQUS8NOOT7PJH9RI7VV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Sat, 01 Apr 2023 15:55:23 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '1155', 'connection': 'keep-alive', 'x-amzn-requestid': 'H9OFQP4LVAQUS8NOOT7PJH9RI7VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '3430233949'}, 'RetryAttempts': 0}}
 gitpod /workspace/aws-bootcamp-cruddur-2023/backend-flask (main) $ 
 ```
+
+## Verificaton Image
+
+![DDB SChemaLoad_prod](assets/week-5/week5-DDB-Created-schema-load.png)
+
+</hr>
+
+- Added VPC EdnPoint 
+## Verificaton Image
+
+![DDB VPC_Endpoint](assets/week-5/Week5-DDB-Created-VPC-Endpoint.png)
+
+</hr>
+
+
 - Remove the `#AWS_ENDPOINT_URL: "http://dynamodb-local:8000"` so that we can re-run the `docker-compose` using the `PROD` values
 
 - Running the new frontend, `Messages` tab will show `EMPTY` but we need to set the url 
@@ -730,6 +819,23 @@ gitpod /workspace/aws-bootcamp-cruddur-2023/backend-flask (main) $
 
 wich once confirmed the user in the system, will `redirect` to the correct `Group UUID` 
 `https://3000-abheejain-awsbootcampcr-og9ik1hw5op.ws-us93.gitpod.io/messages/a4b2807c-8ebd-426c-a1f5-6f9229cf9d9f`
+
+
+## Verificaton Image
+
+![DDB Implement Done3](assets/week-5/Week5-DDB-Implement-Stream-AWS-Lambda-DONE3.png)
+
+</hr>
+
+## Cloudwatch Logs Group Confirmed
+
+## Verificaton Image
+
+![DDB Implement Done2](assets/week-5/Week5-DDB-Implement-Stream-AWS-Lambda-DONE2.png)
+
+</hr>
+
+
 
 FINISHED 
 
