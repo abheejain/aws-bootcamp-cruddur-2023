@@ -26,6 +26,9 @@ tasks:
     command: | 
       cd frontend-react-js
       npm i
+  - name: cdk
+    before: |
+      npm install aws-cdk-lib -g
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
