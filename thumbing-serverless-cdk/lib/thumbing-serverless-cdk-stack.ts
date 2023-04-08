@@ -7,6 +7,13 @@ import * as dotenv from 'dotenv';
 //const dotenv = require('dotenv')
 dotenv.config();
 
+const bucketName: string = process.env.THUMBING_BUCKET_NAME as string;
+const folderInput: string = process.env.THUMBING_S3_FOLDER_INPUT as string;
+const folderOutput: string = process.env.THUMBING_S3_FOLDER_OUTPUT as string;
+//const webhookUrl: string = process.env.THUMBING_WEBHOOK_URL as string;
+//const topicName: string = process.env.THUMBING_TOPIC_NAME as string;
+const functionPath: string = process.env.THUMBING_FUNCTION_PATH as string;
+
 export class ThumbingServerlessCdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -33,7 +40,7 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
   // FUnction for Lambda
 //   createLambda(): cdk.lambda_layer_awscli.
   createLambda(functionPath: string, bucketName: string, folderInput: string, folderOutput: string): lambda.IFunction{
-    const lambdaFunction = new lambda.Function(this, 'ThumbiLambda', {
+    const lambdaFunction = new lambda.Function(this, 'equinox9-crudder-thumbs', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
       code: lambda.Code.fromAsset(functionPath),
