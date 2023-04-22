@@ -1206,11 +1206,36 @@ ns-46.awsdns-05.com     AAAA IPv6 address = 2600:9000:5300:2e00::1
 ns-831.awsdns-39.net    AAAA IPv6 address = 2600:9000:5303:3f00::1
 ```
 
-
 - Create an SSL cerificate via ACM
-	
-- Setup a record set for naked domain to point to `frontend-react-js`	
-- Setup a record set for api subdomain to point to the `backend-flask`
+
+- Update the ALB with new Liserners 
+
+## week6-domain-setup-added-listerners-to-alb.png
+
+- Remove `HTTP-3000` and `HTTP-4567`
+
+## Verification 
+
+- Add Rule to `443` as `Host isapi.lifecoaches.club` to `Forward to
+cruddur-backend-flask-tg: 1 (100%)`
+
+- Create 2 records in Route53 
+- Setup a record set for naked domain to point to frontend-react-js and
+- Setup a record set for api subdomain to point to the backend-flask, - `api.domainname`
+as
+```
+A Record 
+Alias 
+- Region 
+`dualstack.cruddur-alb-15283928...`
+``
+- This will crate A Records for `lifecoaches.club` and `api/lifecoaches.club/api/health-check`
+
+
+## Verification
+
+week6-domain-setup-backend-done.png
+week6-domain-setup-frontend-done.png
 
 ---
 ---
@@ -1219,9 +1244,77 @@ ns-831.awsdns-39.net    AAAA IPv6 address = 2600:9000:5303:3f00::1
 ---
 
 ## Configure CORS to only permit traffic from our domain	
+- Get the endpoints working 
+
+- update `task-definitions/backend-flask.json` file with correct `frontend` and `backend` URLs
+```
+{"name": "FRONTEND_URL", "value": "https://lifecoaches.club"},
+{"name": "BACKEND_URL", "value": "https://api.lifecoaches.club"},
+```
+
+
+
+- Register the Task Definition for `backend`
+
+```
+aws ecs register-task-definition --cli-input-json file://aws/task-definitions/backend-flask.json
+
+```
+no need to push image for `backend` but for `frontend`
+
+- and for `frontend`, we need to update the `build script` 
+- make sure `logged in to ECR`
+
+- Set URL for Frontend
+```
+export ECR_FRONTEND_REACT_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/frontend-react-js"
+echo $ECR_FRONTEND_REACT_URL
+```
+gives `530454120249.dkr.ecr.ap-southeast-1.amazonaws.com/frontend-react-js`
+
+- go in to `frontend` dir
+
+```
+docker build \
+--build-arg REACT_APP_BACKEND_URL="https://api.lifecoaches.club" \
+--build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
+--build-arg REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
+--build-arg REACT_APP_AWS_USER_POOLS_ID="ca-central-1_CQ4wDfnwc" \
+--build-arg REACT_APP_CLIENT_ID="5b6ro31g97urk767adrbrdj1g5" \
+-t frontend-react-js \
+-f Dockerfile.prod \
+.
+
+```
+
+- Tag Image
+```
+docker tag frontend-react-js:latest $ECR_FRONTEND_REACT_URL:latest
+```
+- Push Image
+```
+docker push $ECR_FRONTEND_REACT_URL:latest
+```
+
+---
+
 ## Secure Flask by not running in debug mode	
+
+---
 ## Implement Refresh Token for Amazon Cognito	Refactor bin directory to be top level	
+
+
+---
 ## Configure task defintions to contain x-ray and turn on Container Insights	
+
+
+---
 ## Change Docker Compose to explicitly use a user-defined network	
+
+---
 ## Create Dockerfile specfically for production use case	
+
+---
 ## Using ruby generate out env dot files for docker using erb templates
+
+---
