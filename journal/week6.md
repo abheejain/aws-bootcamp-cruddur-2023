@@ -1453,17 +1453,16 @@ const res = await fetch(backend_url, {
 ```
 ---
 ## Configure task defintions to contain x-ray and turn on Container Insights	
-### Change Docker Compose to explicitly use a user-defined network	
-### Create Dockerfile specfically for production use case	
-### Using ruby generate out env dot files for docker using erb templates
+### Tasks to be done under this sectin of Week-7 Part are
+- Change Docker Compose to explicitly use a user-defined network	
+- Create Dockerfile specfically for production use case	
+- Using ruby generate out env dot files for docker using erb templates
 
+Using Andrew's favourite part to tdo with `Ruby Language` With erb FOLDER
+`.env` naming convention to be noted 
 
-With erb FOLDER
-
-.env 
-
-Note: Make sure the values passed in double quotations 
-But in the .rb files do not need quotations
+Note: Make sure the values passed in `double quotations` 
+But in the `.rb` files do not need quotations
 
 After making the changes and adding the erb files along with using the .env var files, `docker-compose up` to make sure it all works `LOCALLY`
 
@@ -1506,3 +1505,7 @@ register and deploy
 - Turned on now
 
 This can be checked in CoudWatch - Container Insights
+
+=====
+Week 6 - 7 Finished 
+=====
