@@ -1210,7 +1210,8 @@ ns-831.awsdns-39.net    AAAA IPv6 address = 2600:9000:5303:3f00::1
 
 - Update the ALB with new Liserners 
 
-## week6-domain-setup-added-listerners-to-alb.png
+## Verificatino Image
+week6-domain-setup-added-listerners-to-alb.png
 
 - Remove `HTTP-3000` and `HTTP-4567`
 
@@ -1300,21 +1301,208 @@ docker push $ECR_FRONTEND_REACT_URL:latest
 
 ## Secure Flask by not running in debug mode	
 
+- From the `cruddur-alb-sg` security group, remove the `4567` and `3000`
+And
+- `443` and `80`, set `Source` to `My IP`
+
+- Remove `degugger  FASK` code from `Dockerfile`
+- Next, check on the `Dockerfile.prod` in `backend`, set ` --no-debugger` 
+
+- create `ecr/login` , `chmod` 
+
+- from the `backed` folder, run 
+```
+docker build -f Dockerfile.prod -t backend-flask-prod .
+```
+- Before going to test it, make sure the local Pordgres Server is running 
+
+
+Create ./bin/docker/backend-flask-prod
+
+
+#! /usr/bin/bash
+```
+docker run -rm \
+-p 4567:4567 \
+-e AWS_ENDPOINT_URL="http://dynamodb-local:8000" \
+-e CONNECTION_URL="postgresql://postgres:password@db:5432/cruddur" \
+-e FRONTEND_URL="https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}" \
+-e BACKEND_URL="https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}" \
+-e OTEL_SERVICE_NAME='backend-flask' \
+-e OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io" \
+-e OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=${HONEYCOMB_API_KEY}" \
+-e AWS_XRAY_URL="*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*" \
+-e AWS_XRAY_DAEMON_ADDRESS="xray-daemon:2000" \
+-e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
+-e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+-e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+-e ROLLBAR_ACCESS_TOKEN="${ROLLBAR_ACCESS_TOKEN}" \
+-e AWS_COGNITO_USER_POOL_ID="${AWS_COGNITO_USER_POOL_ID}" \
+-e AWS_COGNITO_USER_POOL_CLIENT_ID="5b6ro31g97urk767adrbrdj1g5" \   
+-it backend-flask-prod
+```
+
+- It may give an error 
+`pool-1: Connection is bad: Name or service not known` 
+because the Docker is not running 
+
+
+Just run only `db` and `dynamodb-local` containers 
+
+- But still it was failing to `run` 
+
+- Went to `app.py` 
+
+THis is to test only to `generate a bug`, added 
+```
+hello = nune
+hello()
+```
+in the `def health_check():` block
+
+- Run Docker composer 
+
+- Check 4567 cntainer in browser with `api/health-check` to see if it throws an error
+- It should 
+
+and 
+
+- now `change` to set `--no-debug`
+- docker compose up again to check 
+- Check 4567 cntainer in browser with `api/health-check` to see if it throws an error `Internal Server Error`
+
+- Success 
+
 ---
+
+Arranging the script files
+
+- Create Folder structure to arrange the `docker comands` 
+- Docker
+	- run
+		- backend-flask-prod
+			```
+			#! usr/bin/bash
+	
+			docker build -f Dockerfile.prod -t backend-flask-prod .
+			```
+		- frontend-react-js
+			```
+			#! usr/bin/bash
+	
+			docker build \
+			--build-arg REACT_APP_BACKEND_URL="https://api.lifecoaches.club" \
+			--build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
+			--build-arg REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
+			--build-arg REACT_APP_AWS_USER_POOLS_ID="ap-southeast-1_jiRQOZ7SS" \
+			--build-arg REACT_APP_CLIENT_ID="7p3n1sa7ea43n6q205g82fnu9" \
+			-t frontend-react-js \
+			-f Dockerfile.prod \
+			.
+			```
+					
+
+	- build
+
+	
+## Fix Messaging In Production
+
+
 ## Implement Refresh Token for Amazon Cognito	Refactor bin directory to be top level	
 
 
+// "python /backend-flask/bin/flask/health-check"
+          
+./bin/db/setup 
+./bin/db/schema-load 
+./bin/db/seed 
+ ./bin/ddb/schema-load
+./bin/ddb/seed 
+
+
+INSERT INTO public.users (display_name, email, handle, cognito_user_id)
+VALUES
+  ('Andrew Bayko', 'bayko@exampro.co', 'bayko' ,'MOCK');
+
+## Here we will fix the `Token Expiry` issue as well 
+Thank you to the user `poxrud` 
+Note as - 
+Cognito by itself will automatically store the access token in local storage. It is unnecessary to store it again.
+Here is a simpler getAccessToken function.
+
+```
+const getAccessToken = async () => {
+  try {
+    const session = await Auth.currentSession();
+    return session.getAccessToken().getJwtToken();
+  } catch (err) {
+    console.log(err);
+  }
+};
+```
+
+Then whenever you need the access token you can just get it from Cognito:
+```
+const access_token = await getAccessToken();
+const res = await fetch(backend_url, {
+  headers: {
+    Authorization: `Bearer ${access_token}`,
+  },
+  method: "GET",
+});
+```
 ---
 ## Configure task defintions to contain x-ray and turn on Container Insights	
+### Change Docker Compose to explicitly use a user-defined network	
+### Create Dockerfile specfically for production use case	
+### Using ruby generate out env dot files for docker using erb templates
 
 
----
-## Change Docker Compose to explicitly use a user-defined network	
+With erb FOLDER
 
----
-## Create Dockerfile specfically for production use case	
+.env 
 
----
-## Using ruby generate out env dot files for docker using erb templates
+Note: Make sure the values passed in double quotations 
+But in the .rb files do not need quotations
 
----
+After making the changes and adding the erb files along with using the .env var files, `docker-compose up` to make sure it all works `LOCALLY`
+
+Update aws/task-definiitions/backend-flask.json has `health-check` path
+Need to be fixed by moving the `health-check` file to `backend-flask/bin/health-check`
+
+After that we refresh the code in prod 
+
+Backend
+- build
+- push
+- register (as we have new values in Task Definition) (IAM PassRle issue, `Cruddur_TaskRole`- maybe SCP - because keys are committed to the repo 
+
+- Need to protect keys - do not commit your AWS secret 
+
+- Again push
+- deploy
+(Issue in `health check`)
+
+- Shows X-Ray Running, backend -Healthy
+- X-ray helath check need to see if it is defined
+
+- Register and deploy again still Xray shows `unknown`
+
+- Update the aws/task-definition - frontend-flask-js
+
+- Frontend
+-- register and deploy
+
+Last COMMIT UPdate task def not to have netstat
+
+- Backend 
+-- register and deploy
+
+- Frontend 
+register and deploy
+
+- Turn on Container Insights by going to `ECS Cluster` and  press `update`, Monitoring Tab - enable `Use Container Insights` - press `Update` 
+
+- Turned on now
+
+This can be checked in CoudWatch - Container Insights
