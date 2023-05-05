@@ -19,10 +19,6 @@
 aws logs create-log-group --log-group-name cruddur
 aws logs put-retention-policy --log-group-name cruddur --retention-in-days 1
 ```
-## Varification image
-
-
-
 
 ## Provision ECS Cluster
 - Create ECS Cluster using AWS CLI
@@ -153,13 +149,14 @@ Log
     }
 }
 ```
-AWS ECS create namespace1
-
-AWS ECS create namespace2
 
 
+![AWS ECS create namespace1](assets/week-6-7/week6-AWS-ECS-create-namespace1.png)
+![AWS ECS create namespace2](assets/week-6-7/week6-AWS-ECS-create-namespace2.png)
 
-Prepare ECR
+</hr>
+
+## Prepare ECR
 - Need respos
 1. Base image - Python
 2. Frontend - Flask
@@ -183,8 +180,7 @@ aws ecr create-repository \
 Note: Select the repo in the ECR, and press on the button called `View push commands`. 
 
 ## Verificaton image
-week6-aws-ecr-repositories-created.png
-
+![AWS ECR Creation](assets/week-6-7/week6-aws-ecr-repositories-created.png)
 
 
 ## Running for Python image and making sure it works with backend and db
@@ -213,7 +209,7 @@ aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --usernam
 ```
 aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"```
 ```
-- Gives
+Gives
 ```
 WARNING! Your password will be stored unencrypted in /home/gitpod/.docker/config.json.
 Configure a credential helper to remove this warning. See
@@ -232,9 +228,7 @@ export ECR_PYTHON_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
 echo $ECR_PYTHON_URL
 ```
 
-
-## Verification Image
-ECR-URI
+Note: ECR-URI
 ```
 cruddur-python	
 530454120249.dkr.ecr.ap-southeast-1.amazonaws.com/cruddur-python
@@ -255,10 +249,10 @@ docker tag python:3.10-slim-buster $ECR_PYTHON_URL:3.10-slim-buster
 docker push $ECR_PYTHON_URL:3.10-slim-buster
 ```
 
-## Verification Image
-image-inside-ECR-repositories
+## Verificaton image
+![AWS ECR python](assets/week-6-7/week6-aws-ecr-repositories-python-slimbuster.png)
 
-week6-aws-ecr-repositories-python-slimbuster.png
+![AWS ECR all_repos](assets/week-6-7/week6-aws-ecr-repositories-created.png)
 
 
 - Once done, we need to update the FlaskApp to use this
@@ -299,8 +293,8 @@ We will ignore for now but go to URL of backend-flask (port 4567), and add `/api
 ```
 
 
-week6-aws-ecr-health-check-success.png
-
+## Verificaton image
+![AWS ECR health_cehck](assets/week-6-7/week6-aws-ecr-health-check-success.png)
 
 
 Ready to push
@@ -746,12 +740,6 @@ Will give successful message as
 
 ```
 
-## Verification Image
-week6-aws-ecs-task-definitions-fr-bk-end.png
-
-
-- Now to launch the Containers
-
 Get DEFAULT_VPC_ID and DEFAULT_SUBNET_IDS
 
 ```
@@ -896,13 +884,18 @@ Note: `sg-079d711a94c8c7921`
 
 - Configure
 
+## Verificaton image
+![week6-aws-cruddur-alb-sg.png](assets/week-6-7/week6-aws-cruddur-alb-sg.png)
 
-week6-aws-cruddur-alb-sg.png
 
-week6-aws-alb-crud-srv-sg
+## Verificaton image
+![week6-aws-alb-crud-srv-sg](assets/week-6-7/week6-aws-alb-crud-srv-sg.png)
+
 
 - Target Group
-week6-aws-cruddur-backend-flask-tg
+
+## Verificaton image
+![week6-aws-cruddur-backend-flask-tg](assets/week-6-7/week6-aws-cruddur-backend-flask-tg.png)
 
 Next page, `Register targets` keep as default, press `Create target group`
 - Created `arn:aws:elasticloadbalancing:ap-southeast-1:530454120249:targetgroup/cruddur-backend-flask-tg/1b124527a9b268b3`
@@ -911,7 +904,10 @@ Next page, `Register targets` keep as default, press `Create target group`
 
 - Add another Target group listening on `port 3000` name `cruddur-frontend-react-js`
  
-week6-aws-cruddur-alb-cration.png
+
+## Verificaton image
+![week6-aws-cruddur-alb-cration](assets/week-6-7/week6-aws-cruddur-alb-cration.png)
+
 
 ---
 
@@ -933,12 +929,11 @@ containerPort: 4567
 - Attributes enable to save in S3  - paid service 
 - create `S3` bucket for `Cruddur ALb Access Logs` 
 
-## Verification 
-week6-backend-target- group-healthy.png
-
+## Verificaton image
+![week6-backend-target- group-healthy](assets/week-6-7/week6-backend-target- group-healthy.png)
 
 --- 
-Backend -DONE
+# Backend -DONE
 ---
 
 - Now we will CONTINUE the Frontend, where we have already 
@@ -1089,8 +1084,9 @@ docker build \
 -f Dockerfile.prod \
 .
 ```
-## Verification image
-week6-frontend-build-npm.png
+## Verificaton image
+![week6-frontend-build-npm](assets/week-6-7/week6-frontend-build-npm.png)
+
 
 Make sure you are logged in to the ECR by checking in correct context
 ```
@@ -1109,8 +1105,9 @@ docker push $ECR_FRONTEND_REACT_URL:latest
 ```
 
 
-#Verification Image
-week6-frontend-iamge-push-Login-first.png
+## Verificaton image
+![week6-frontend-iamge-push-Login-first](assets/week-6-7/week6-frontend-iamge-push-Login-first.png)
+
 
 
 If you want to run and test it
@@ -1121,20 +1118,16 @@ docker run --rm -p 3000:3000 -it frontend-react-js
 Check with F12, chec red error for `4567`
 - means correctly working even though we did not get connection between freontend and backend
 
-## Verification Image
-C:\Users\Rainbow Laptop\Pictures\AWS Bootcamp\week6-frontend-test-after-push.png
+## Verificaton image
+![week6-frontend-test-after-push](assets/week-6-7/week6-frontend-test-after-push.png)
 
-
-
-
-
+Note:
 Make sure you are on the correct directory of `aws-bootcamp-cruddur-2023` 
 
 Register Task Definition 
 ```
 aws ecs register-task-definition --cli-input-json file://aws/task-definitions/frontend-react-js.json
 ```
-
 
 Create Service Frontend 
 ```
@@ -1152,12 +1145,12 @@ still kept initalizing
 so we need to `shell` into it to see what is wrong 
 
 
-week6-frontend-service-healthy.png
+## Verificaton image
+![week6-frontend-service-healthy](assets/week-6-7/week6-frontend-service-healthy.png)
 
-week6-frontend-target- group-healthy.png
+![week6-frontend-target- group-healthy](assets/week-6-7/week6-frontend-target- group-healthy.png)
 
 ---
-
 
 ## Manage your domain useing Route53 via hosted zone
 Note: Domain used is `lifecoaches.club`
@@ -1171,14 +1164,14 @@ Create Service Backend
 aws ecs create-service --cli-input-json file://aws/json/service-backend-flask.json
 ```
 
-## Verification 
-week6-backend-service-healthy.png
+## Verification image
+![week6-backend-service-healthy](assets/week-6-7/week6-backend-service-healthy.png)
 
-
-http://cruddur-alb-1528392881.ap-southeast-1.elb.amazonaws.com:3000/
+`http://cruddur-alb-1528392881.ap-southeast-1.elb.amazonaws.com:3000/`
 
 ## Verification image
-week6-frontend-service-using-elb.png
+
+![week6-frontend-service-using-elb](assets/week-6-7/week6-frontend-service-using-elb.png)
 
 	
 ### Create Hosted Zone
@@ -1211,7 +1204,8 @@ ns-831.awsdns-39.net    AAAA IPv6 address = 2600:9000:5303:3f00::1
 - Update the ALB with new Liserners 
 
 ## Verificatino Image
-week6-domain-setup-added-listerners-to-alb.png
+
+![week6-domain-setup-added-listerners-to-alb](assets/week-6-7/week6-domain-setup-added-listerners-to-alb.png)
 
 - Remove `HTTP-3000` and `HTTP-4567`
 
@@ -1229,14 +1223,14 @@ A Record
 Alias 
 - Region 
 `dualstack.cruddur-alb-15283928...`
-``
+```
 - This will crate A Records for `lifecoaches.club` and `api/lifecoaches.club/api/health-check`
 
 
-## Verification
+## Verification Image
+![week6-domain-setup-backend-done](assets/week-6-7/week6-domain-setup-backend-done.png)
 
-week6-domain-setup-backend-done.png
-week6-domain-setup-frontend-done.png
+![week6-domain-setup-frontend-done](assets/week-6-7/week6-domain-setup-frontend-done.png)
 
 ---
 ---
@@ -1375,41 +1369,19 @@ and
 
 ---
 
-Arranging the script files
+## Arranging the script files
 
 - Create Folder structure to arrange the `docker comands` 
 - Docker
 	- run
 		- backend-flask-prod
-			```
-			#! usr/bin/bash
-	
-			docker build -f Dockerfile.prod -t backend-flask-prod .
-			```
 		- frontend-react-js
-			```
-			#! usr/bin/bash
-	
-			docker build \
-			--build-arg REACT_APP_BACKEND_URL="https://api.lifecoaches.club" \
-			--build-arg REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
-			--build-arg REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
-			--build-arg REACT_APP_AWS_USER_POOLS_ID="ap-southeast-1_jiRQOZ7SS" \
-			--build-arg REACT_APP_CLIENT_ID="7p3n1sa7ea43n6q205g82fnu9" \
-			-t frontend-react-js \
-			-f Dockerfile.prod \
-			.
-			```
-					
-
-	- build
+		- build
 
 	
 ## Fix Messaging In Production
 
-
 ## Implement Refresh Token for Amazon Cognito	Refactor bin directory to be top level	
-
 
 // "python /backend-flask/bin/flask/health-check"
           
@@ -1419,13 +1391,15 @@ Arranging the script files
  ./bin/ddb/schema-load
 ./bin/ddb/seed 
 
-
+```
 INSERT INTO public.users (display_name, email, handle, cognito_user_id)
 VALUES
   ('Andrew Bayko', 'bayko@exampro.co', 'bayko' ,'MOCK');
+```
 
 ## Here we will fix the `Token Expiry` issue as well 
 Thank you to the user `poxrud` 
+
 Note as - 
 Cognito by itself will automatically store the access token in local storage. It is unnecessary to store it again.
 Here is a simpler getAccessToken function.
@@ -1452,6 +1426,7 @@ const res = await fetch(backend_url, {
 });
 ```
 ---
+
 ## Configure task defintions to contain x-ray and turn on Container Insights	
 ### Tasks to be done under this sectin of Week-7 Part are
 - Change Docker Compose to explicitly use a user-defined network	
@@ -1492,7 +1467,7 @@ Backend
 - Frontend
 -- register and deploy
 
-Last COMMIT UPdate task def not to have netstat
+Last COMMIT Update task def not to have netstat
 
 - Backend 
 -- register and deploy
@@ -1500,12 +1475,42 @@ Last COMMIT UPdate task def not to have netstat
 - Frontend 
 register and deploy
 
+### Final Screens
+- AWS Console for `Backend`, `Fronend` along with `Services` 
+
+![week6-backend-target- group-healthy](assets/week-6-7/week6-backend-target- group-healthy.png)
+
+![week6-backend-target- group-healthy](assets/week-6-7/week6-backend-target- group-healthy.png)
+![week6-frontend-target- group-healthy](assets/week-6-7/week6-frontend-target- group-healthy.png)
+![week6-7-Services-healthy 2](assets/week-6-7/week6-7-Services-healthy 2.png)
+
+- Frontend `Cruddur App`
+
+![week6-7-Live_Frontend_Working](assets/week-6-7/week6-7-Live_Frontend_Working.png)
+
+- Backend RDS Activities
+
+![week6-RDS-activities-data](assets/week-6-7/week6-RDS-activities-data.png)
+
+Note: 
+- Saving Cost Spent on the Services, you can set the Services Count to zero, so no bill is incurred. 
+- While the services are not running the `Cruddur domain` when reached publicly, it will show as `503 - Error`, but it is totally fine. 
+
+![week6-503-error](assets/week-6-7/week6-503-error.png)
+
+--- 
+
 - Turn on Container Insights by going to `ECS Cluster` and  press `update`, Monitoring Tab - enable `Use Container Insights` - press `Update` 
 
-- Turned on now
+- `Enable` it.
 
 This can be checked in CoudWatch - Container Insights
 
-=====
-Week 6 - 7 Finished 
-=====
+## Verification Image
+![week6-7-Showing-Container-Insights](assets/week-6-7/week6-7-Showing-Container-Insights.png)
+
+---
+---
+# Week 6 - 7 Finished 
+--- 
+---
